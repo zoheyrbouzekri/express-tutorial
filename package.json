@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/zoheyrbouzekri/express-tutorial/issues"
   },
-  "homepage": "https://github.com/zoheyrbouzekri/express-tutorial#readme"
+  "homepage": "https://github.com/zoheyrbouzekri/express-tutorial#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
