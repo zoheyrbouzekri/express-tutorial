@@ -5,6 +5,10 @@ app.get("/", (req,res) => {
     res.send('Hello from Express!')
 })
 
+app.get("/about", (req,res) => {
+    res.send('This is the About Page')
+})
+
 app.listen(3000, () => {
     console.log("The server is running!")
 })
