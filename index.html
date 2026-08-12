@@ -6,7 +6,7 @@
     <title>Front-End</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <!-- <h1>Hello World</h1>
     <button>Get Message</button>
 
     <script>
@@ -25,6 +25,34 @@
         }).catch(err =>{
             console.error(err)
         })})
+    </script> -->
+
+    <form id="contact-form">
+        <input placeholder="name" id="name">
+        <textarea placeholder="message" id="message"></textarea>
+        <button>Submit</button>
+    </form>
+    <script>
+        const form = document.getElementById("contact-form")
+        const nameInput = document.getElementById("name")
+        const messageTextarea = document.getElementById("message")
+
+        form.addEventListener('submit', (e)=> {
+            e.preventDefault()
+
+            const name = nameInput.value
+            const message = messageTextarea.value
+
+            fetch("http://localhost:3000/message",{
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify({ name, message })
+                })
+                .then(res => res.json())
+                .then(data => console.log(data));
+            })
     </script>
 </body>
 </html>

@@ -6,6 +6,8 @@ app.use(cors({
     origin: ['http://localhost:5500', 'http://127.0.0.1:5500']
 }))
 
+app.use(express.json())
+
 const products = [
     { id: 1, name: "Laptop", price: 200000 },
     { id: 2, name: "Mouse", price: 7000 }
@@ -40,6 +42,12 @@ app.get("/products/:id", (req, res) => {
 app.get("/message", (req,res)=>{
     res.json({message:"Hello world from Express Server!"})
 })
+
+app.post('/message', (req, res) => {
+    const { name, message } = req.body;
+    console.log(`Received message from ${name}: ${message}`);
+    res.json({ message: 'Thank you for your message' });
+});
 
 app.listen(3000, () => {
     console.log("The server is running!");
