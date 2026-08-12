@@ -1,17 +1,23 @@
 const cors = require("cors")
 const express = require("express");
 const app = express();
+const productsRouter = require('./products');
 
 app.use(cors({
     origin: ['http://localhost:5500', 'http://127.0.0.1:5500']
 }))
 
+const loggerMiddleware = (req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+    next();
+};
+app.use(loggerMiddleware);
+
 app.use(express.json())
 
-const products = [
-    { id: 1, name: "Laptop", price: 200000 },
-    { id: 2, name: "Mouse", price: 7000 }
-];
+app.use('/products', productsRouter);
+
+
 
 app.get("/", (req, res) => {
     res.send("Hello from Express!");
@@ -23,20 +29,6 @@ app.get("/about", (req, res) => {
 
 app.get("/contact", (req, res) => {
     res.send("This is the Contact Page");
-});
-
-app.get("/products", (req, res) => {
-    res.json(products);
-});
-
-app.get("/products/:id", (req, res) => {
-    const id = Number(req.params.id);
-
-    const requestedProduct = products.find(
-        (product) => product.id === id
-    );
-
-    res.json(requestedProduct);
 });
 
 app.get("/message", (req,res)=>{
