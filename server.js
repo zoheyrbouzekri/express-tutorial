@@ -1,5 +1,10 @@
+const cors = require("cors")
 const express = require("express");
 const app = express();
+
+app.use(cors({
+    origin: ['http://localhost:5500', 'http://127.0.0.1:5500']
+}))
 
 const products = [
     { id: 1, name: "Laptop", price: 200000 },
@@ -31,6 +36,10 @@ app.get("/products/:id", (req, res) => {
 
     res.json(requestedProduct);
 });
+
+app.get("/message", (req,res)=>{
+    res.json({message:"Hello world from Express Server!"})
+})
 
 app.listen(3000, () => {
     console.log("The server is running!");
